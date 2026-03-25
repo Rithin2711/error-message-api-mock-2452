@@ -31,10 +31,10 @@ app.add_middleware(
 )
 
 
-class MessageResponse(BaseModel):
-    """Response payload containing a single message."""
+class ErrorResponse(BaseModel):
+    """Response payload containing a single error string."""
 
-    message: str = Field(..., description="Human-readable message.")
+    error: str = Field(..., description="Human-readable error message.")
 
 
 # PUBLIC_INTERFACE
@@ -43,16 +43,16 @@ class MessageResponse(BaseModel):
     tags=["Health"],
     summary="Health check",
     description="Simple health check endpoint.",
-    response_model=MessageResponse,
+    response_model=dict,
     operation_id="health_check",
 )
-def health_check() -> MessageResponse:
+def health_check() -> dict:
     """Health check endpoint.
 
     Returns:
-        MessageResponse: `{'message': 'Healthy'}` if the service is running.
+        dict: `{"message": "Healthy"}` if the service is running.
     """
-    return MessageResponse(message="Healthy")
+    return {"message": "Healthy"}
 
 
 # PUBLIC_INTERFACE
@@ -60,14 +60,14 @@ def health_check() -> MessageResponse:
     "/error-message",
     tags=["Mock"],
     summary="Get fixed error message",
-    description='Returns the exact message: "date and time is missing".',
-    response_model=MessageResponse,
+    description='Returns the exact error: "date and time is missing".',
+    response_model=ErrorResponse,
     operation_id="get_error_message",
 )
-def get_error_message() -> MessageResponse:
+def get_error_message() -> ErrorResponse:
     """Get the fixed error message used by the mock backend.
 
     Returns:
-        MessageResponse: Always returns `{"message": "date and time is missing"}`.
+        ErrorResponse: Always returns `{"error": "date and time is missing"}`.
     """
-    return MessageResponse(message="date and time is missing")
+    return ErrorResponse(error="date and time is missing")
