@@ -1,0 +1,4 @@
+{
+    "command": "pytest",
+    "working_directory": "/home/kavia/workspace/code-generation/error-message-api-mock-2452/mock_backend_fastapi"
+}
