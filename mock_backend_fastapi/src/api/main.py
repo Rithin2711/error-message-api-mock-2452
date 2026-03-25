@@ -60,7 +60,7 @@ def health_check() -> MessageResponse:
     "/error-message",
     tags=["Mock"],
     summary="Get fixed error message",
-    description='Returns the exact message: "error: date and time is missing".',
+    description='Returns the exact message: "date and time is missing".',
     response_model=MessageResponse,
     operation_id="get_error_message",
 )
@@ -68,7 +68,6 @@ def get_error_message() -> MessageResponse:
     """Get the fixed error message used by the mock backend.
 
     Returns:
-        MessageResponse: Always returns `{"message": "error: date and time is missing"}`.
+        MessageResponse: Always returns `{"message": "date and time is missing"}`.
     """
-    # NOTE: Keep this exact string as required by the task.
-    return MessageResponse(message="error: date and time is missing")
+    return MessageResponse(message="date and time is missing")
